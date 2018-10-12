@@ -125,6 +125,14 @@ class MainActivity : AppCompatActivity(), MainNavigator, AnkoLogger {
         }
         nav.layoutManager = LinearLayoutManager(this)
         nav.adapter = feedAdapter
+//      by utkarsh
+//        val feedToAdd = Feed(link = "http://cryptodaily.co.uk/feed", title = "Crypto Daily")
+//        feedToAdd.retrieveFullText = true // do that automatically for google news feeds
+//          to add feed directly
+//        context.doAsync { App.db.feedDao().insert(feedToAdd) }
+
+        //to delete feed by url
+//        context.doAsync { App.db.feedDao().delete(App.db.feedDao().findByLink(feedToAdd.link)!!) }
 
         add_feed_fab.onClick {
             FeedSearchDialog(this).show()
@@ -394,7 +402,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, AnkoLogger {
         } else {
             if (getPrefBoolean(PrefConstants.OPEN_BROWSER_DIRECTLY, false)) {
                 openInBrowser(entryId)
-            }else{
+            } else {
                 startActivity<EntryDetailsActivity>(EntryDetailsFragment.ARG_ENTRY_ID to entryId, EntryDetailsFragment.ARG_ALL_ENTRIES_IDS to allEntryIds.take(500)) // take() to avoid TransactionTooLargeException
             }
         }

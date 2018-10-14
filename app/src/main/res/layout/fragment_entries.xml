@@ -16,12 +16,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <net.frju.flym.ui.views.SwipeRefreshLayout
+        <com.mstudio.cryptonews.ui.views.SwipeRefreshLayout
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <net.frju.flym.ui.views.EmptyRecyclerView
+            <com.mstudio.cryptonews.ui.views.EmptyRecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -29,7 +29,7 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="60dp"
                 android:scrollbars="vertical" />
-        </net.frju.flym.ui.views.SwipeRefreshLayout>
+        </com.mstudio.cryptonews.ui.views.SwipeRefreshLayout>
 
 		<TextView
 			android:id="@+id/empty_view"
@@ -41,13 +41,13 @@
 			android:text="@string/no_entries"
 			android:textColor="@android:color/darker_gray" />
 
-        <android.support.design.widget.FloatingActionButton
+      <!--  <android.support.design.widget.FloatingActionButton
             android:id="@+id/read_all_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_read_all_white_24dp" />
+            android:src="@drawable/ic_read_all_white_24dp" />-->
 
     </android.support.design.widget.CoordinatorLayout>
 

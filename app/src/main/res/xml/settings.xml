@@ -16,7 +16,7 @@
             android:summary="@string/settings_refresh_enabled_description"
             android:title="@string/settings_refresh_enabled" />
 
-        <net.frju.flym.ui.views.AutoSummaryListPreference
+        <com.mstudio.cryptonews.ui.views.AutoSummaryListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="7200"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:title="@string/settings_category_content_presentation">
 
-        <net.frju.flym.ui.views.AutoSummaryListPreference
+        <com.mstudio.cryptonews.ui.views.AutoSummaryListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="DARK"
@@ -50,7 +50,7 @@
             android:inputType="text"
             android:key="theme"
             android:title="@string/settings_theme" />
-        <net.frju.flym.ui.views.AutoSummaryListPreference
+        <com.mstudio.cryptonews.ui.views.AutoSummaryListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="4"
@@ -60,7 +60,7 @@
             android:key="keep_time"
             android:title="@string/settings_keep_time" />
 
-        <net.frju.flym.ui.views.AutoSummaryListPreference
+        <com.mstudio.cryptonews.ui.views.AutoSummaryListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="0"
@@ -78,7 +78,7 @@
             android:summary="@string/settings_display_images_description"
             android:title="@string/settings_display_images" />
 
-        <net.frju.flym.ui.views.AutoSummaryListPreference
+        <com.mstudio.cryptonews.ui.views.AutoSummaryListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="WIFI_ONLY_PRELOAD"

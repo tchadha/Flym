@@ -11,11 +11,11 @@ android {
 	compileSdkVersion 27
 	buildToolsVersion "28.0.3"
 	defaultConfig {
-		applicationId "net.frju.flym"
+		applicationId "com.mstudio.cryptonews"
 		minSdkVersion 21
 		targetSdkVersion 27
-		versionCode 18
-		versionName "2.2.3"
+		versionCode 1
+		versionName "1.0"
 	}
 
 	lintOptions {

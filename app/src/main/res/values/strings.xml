@@ -131,4 +131,33 @@
         <item>Dark</item>
         <item>Black</item>
     </string-array>
+
+
+    <string name="coindesk_title">Coin Desk</string>
+    <string name="bitcoin_news_title">Bitcoin News</string>
+    <string name="coin_news_asia_title">Coin News Asia</string>
+    <string name="coin_telegraph_title">Coin Telegraph</string>
+    <string name="coin_journal_title">Coin Journal</string>
+    <string name="news_btc_title">NewsBTC</string>
+    <string name="the_blockchain_title">The Blockchain</string>
+    <string name="cryptocoins_news_title">Cryptocoins News</string>
+    <string name="bitcoinist_title">Bitcoinist</string>
+    <string name="coinfox_title">CoinFox</string>
+    <string name="coinspectator_title">CoinSpectator</string>
+    <string name="google_news_bitcoin_title">Bitcoin - Google News</string>
+    <string name="crytpo_daily_title">Crypto Daily</string>
+
+    <string name="coindesk_url">http://feeds.feedburner.com/CoinDesk</string>
+    <string name="bitcoin_news_url">http://news.bitcoin.com</string>
+    <string name="coin_news_asia_url">http://www.coinnewsasia.com/feed/</string>
+    <string name="coin_telegraph_url">https://cointelegraph.com/feed/</string>
+    <string name="coin_journal_url">https://coinjournal.net/feed/</string>
+    <string name="news_btc_url">http://www.newsbtc.com/feed/</string>
+    <string name="the_blockchain_url">http://www.the-blockchain.com/feed/</string>
+    <string name="cryptocoins_news_url">https://www.cryptocoinsnews.com/feed/</string>
+    <string name="bitcoinist_url">http://bitcoinist.com/feed/</string>
+    <string name="coinfox_url">http://www.coinfox.info/rss-feed-en/main-feed-en</string>
+    <string name="coinspectator_url">https://blog.coinspectator.com/feed/</string>
+    <string name="google_news_bitcoin_url">https://news.google.com/news/rss/search/section/q/bitcoin/bitcoin?hl=en&amp;gl=US&amp;ned=us&amp;output=rss;</string>
+    <string name="crypto_daily_url">https://cryptodaily.co.uk/feed/</string>
 </resources>

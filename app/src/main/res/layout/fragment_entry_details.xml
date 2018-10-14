@@ -33,16 +33,16 @@
             android:layout_gravity="end|center_vertical"
             android:src="@drawable/ic_navigate_next_white_24dp" />
 
-        <net.frju.flym.ui.views.SwipeRefreshLayout
+        <com.mstudio.cryptonews.ui.views.SwipeRefreshLayout
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?android:attr/actionBarSize">
 
-            <net.frju.flym.ui.entrydetails.EntryDetailsView
+            <com.mstudio.cryptonews.ui.entrydetails.EntryDetailsView
                 android:id="@+id/entry_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </net.frju.flym.ui.views.SwipeRefreshLayout>
+        </com.mstudio.cryptonews.ui.views.SwipeRefreshLayout>
     </me.thanel.swipeactionview.SwipeActionView>
 </FrameLayout>

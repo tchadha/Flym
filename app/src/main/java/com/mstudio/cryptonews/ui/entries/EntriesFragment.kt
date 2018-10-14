@@ -33,6 +33,7 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import com.mstudio.cryptonews.App
 import com.mstudio.cryptonews.R
 import com.mstudio.cryptonews.data.entities.EntryWithFeed
 import com.mstudio.cryptonews.data.entities.Feed
@@ -101,9 +102,9 @@ class EntriesFragment : Fragment() {
 
 		doAsync {
 			if (entryWithFeed.entry.favorite) {
-				com.mstudio.cryptonews.App.db.entryDao().markAsFavorite(entryWithFeed.entry.id)
+				App.db.entryDao().markAsFavorite(entryWithFeed.entry.id)
 			} else {
-				com.mstudio.cryptonews.App.db.entryDao().markAsNotFavorite(entryWithFeed.entry.id)
+				App.db.entryDao().markAsNotFavorite(entryWithFeed.entry.id)
 			}
 		}
 	})
@@ -166,7 +167,7 @@ class EntriesFragment : Fragment() {
 //					doAsync {
 //						// TODO check if limit still needed
 //						entryIds.withIndex().groupBy { it.index / 300 }.map { pair -> pair.value.map { it.value } }.forEach {
-//							com.mstudio.cryptonews.App.db.entryDao().markAsRead(it)
+//							App.db.entryDao().markAsRead(it)
 //						}
 //					}
 //
@@ -174,7 +175,7 @@ class EntriesFragment : Fragment() {
 //						doAsync {
 //							// TODO check if limit still needed
 //							entryIds.withIndex().groupBy { it.index / 300 }.map { pair -> pair.value.map { it.value } }.forEach {
-//								com.mstudio.cryptonews.App.db.entryDao().markAsUnread(it)
+//								App.db.entryDao().markAsUnread(it)
 //							}
 //
 //							uiThread {
@@ -196,18 +197,18 @@ class EntriesFragment : Fragment() {
 	private fun initDataObservers() {
 		entryIdsLiveData?.removeObservers(this)
 		entryIdsLiveData = when {
-			searchText != null -> com.mstudio.cryptonews.App.db.entryDao().observeIdsBySearch(searchText!!)
-			feed?.isGroup == true && bottom_navigation.selectedItemId == R.id.unreads -> com.mstudio.cryptonews.App.db.entryDao().observeUnreadIdsByGroup(feed!!.id, listDisplayDate)
-			feed?.isGroup == true && bottom_navigation.selectedItemId == R.id.favorites -> com.mstudio.cryptonews.App.db.entryDao().observeFavoriteIdsByGroup(feed!!.id, listDisplayDate)
-			feed?.isGroup == true -> com.mstudio.cryptonews.App.db.entryDao().observeIdsByGroup(feed!!.id, listDisplayDate)
+			searchText != null -> App.db.entryDao().observeIdsBySearch(searchText!!)
+			feed?.isGroup == true && bottom_navigation.selectedItemId == R.id.unreads -> App.db.entryDao().observeUnreadIdsByGroup(feed!!.id, listDisplayDate)
+			feed?.isGroup == true && bottom_navigation.selectedItemId == R.id.favorites -> App.db.entryDao().observeFavoriteIdsByGroup(feed!!.id, listDisplayDate)
+			feed?.isGroup == true -> App.db.entryDao().observeIdsByGroup(feed!!.id, listDisplayDate)
 
-			feed != null && feed?.id != Feed.ALL_ENTRIES_ID && bottom_navigation.selectedItemId == R.id.unreads -> com.mstudio.cryptonews.App.db.entryDao().observeUnreadIdsByFeed(feed!!.id, listDisplayDate)
-			feed != null && feed?.id != Feed.ALL_ENTRIES_ID && bottom_navigation.selectedItemId == R.id.favorites -> com.mstudio.cryptonews.App.db.entryDao().observeFavoriteIdsByFeed(feed!!.id, listDisplayDate)
-			feed != null && feed?.id != Feed.ALL_ENTRIES_ID -> com.mstudio.cryptonews.App.db.entryDao().observeIdsByFeed(feed!!.id, listDisplayDate)
+			feed != null && feed?.id != Feed.ALL_ENTRIES_ID && bottom_navigation.selectedItemId == R.id.unreads -> App.db.entryDao().observeUnreadIdsByFeed(feed!!.id, listDisplayDate)
+			feed != null && feed?.id != Feed.ALL_ENTRIES_ID && bottom_navigation.selectedItemId == R.id.favorites -> App.db.entryDao().observeFavoriteIdsByFeed(feed!!.id, listDisplayDate)
+			feed != null && feed?.id != Feed.ALL_ENTRIES_ID -> App.db.entryDao().observeIdsByFeed(feed!!.id, listDisplayDate)
 
-			bottom_navigation.selectedItemId == R.id.unreads -> com.mstudio.cryptonews.App.db.entryDao().observeAllUnreadIds(listDisplayDate)
-			bottom_navigation.selectedItemId == R.id.favorites -> com.mstudio.cryptonews.App.db.entryDao().observeAllFavoriteIds(listDisplayDate)
-			else -> com.mstudio.cryptonews.App.db.entryDao().observeAllIds(listDisplayDate)
+			bottom_navigation.selectedItemId == R.id.unreads -> App.db.entryDao().observeAllUnreadIds(listDisplayDate)
+			bottom_navigation.selectedItemId == R.id.favorites -> App.db.entryDao().observeAllFavoriteIds(listDisplayDate)
+			else -> App.db.entryDao().observeAllIds(listDisplayDate)
 		}
 
 		entryIdsLiveData?.observe(this, Observer<List<String>> { list ->
@@ -216,18 +217,18 @@ class EntriesFragment : Fragment() {
 
 		entriesLiveData?.removeObservers(this)
 		entriesLiveData = LivePagedListBuilder(when {
-			searchText != null -> com.mstudio.cryptonews.App.db.entryDao().observeSearch(searchText!!)
-			feed?.isGroup == true && bottom_navigation.selectedItemId == R.id.unreads -> com.mstudio.cryptonews.App.db.entryDao().observeUnreadsByGroup(feed!!.id, listDisplayDate)
-			feed?.isGroup == true && bottom_navigation.selectedItemId == R.id.favorites -> com.mstudio.cryptonews.App.db.entryDao().observeFavoritesByGroup(feed!!.id, listDisplayDate)
-			feed?.isGroup == true -> com.mstudio.cryptonews.App.db.entryDao().observeByGroup(feed!!.id, listDisplayDate)
+			searchText != null -> App.db.entryDao().observeSearch(searchText!!)
+			feed?.isGroup == true && bottom_navigation.selectedItemId == R.id.unreads -> App.db.entryDao().observeUnreadsByGroup(feed!!.id, listDisplayDate)
+			feed?.isGroup == true && bottom_navigation.selectedItemId == R.id.favorites -> App.db.entryDao().observeFavoritesByGroup(feed!!.id, listDisplayDate)
+			feed?.isGroup == true -> App.db.entryDao().observeByGroup(feed!!.id, listDisplayDate)
 
-			feed != null && feed?.id != Feed.ALL_ENTRIES_ID && bottom_navigation.selectedItemId == R.id.unreads -> com.mstudio.cryptonews.App.db.entryDao().observeUnreadsByFeed(feed!!.id, listDisplayDate)
-			feed != null && feed?.id != Feed.ALL_ENTRIES_ID && bottom_navigation.selectedItemId == R.id.favorites -> com.mstudio.cryptonews.App.db.entryDao().observeFavoritesByFeed(feed!!.id, listDisplayDate)
-			feed != null && feed?.id != Feed.ALL_ENTRIES_ID -> com.mstudio.cryptonews.App.db.entryDao().observeByFeed(feed!!.id, listDisplayDate)
+			feed != null && feed?.id != Feed.ALL_ENTRIES_ID && bottom_navigation.selectedItemId == R.id.unreads -> App.db.entryDao().observeUnreadsByFeed(feed!!.id, listDisplayDate)
+			feed != null && feed?.id != Feed.ALL_ENTRIES_ID && bottom_navigation.selectedItemId == R.id.favorites -> App.db.entryDao().observeFavoritesByFeed(feed!!.id, listDisplayDate)
+			feed != null && feed?.id != Feed.ALL_ENTRIES_ID -> App.db.entryDao().observeByFeed(feed!!.id, listDisplayDate)
 
-			bottom_navigation.selectedItemId == R.id.unreads -> com.mstudio.cryptonews.App.db.entryDao().observeAllUnreads(listDisplayDate)
-			bottom_navigation.selectedItemId == R.id.favorites -> com.mstudio.cryptonews.App.db.entryDao().observeAllFavorites(listDisplayDate)
-			else -> com.mstudio.cryptonews.App.db.entryDao().observeAll(listDisplayDate)
+			bottom_navigation.selectedItemId == R.id.unreads -> App.db.entryDao().observeAllUnreads(listDisplayDate)
+			bottom_navigation.selectedItemId == R.id.favorites -> App.db.entryDao().observeAllFavorites(listDisplayDate)
+			else -> App.db.entryDao().observeAll(listDisplayDate)
 		}, 30).build()
 
 		entriesLiveData?.observe(this, Observer<PagedList<EntryWithFeed>> { pagedList ->
@@ -236,9 +237,9 @@ class EntriesFragment : Fragment() {
 
 		newCountLiveData?.removeObservers(this)
 		newCountLiveData = when {
-			feed?.isGroup == true -> com.mstudio.cryptonews.App.db.entryDao().observeNewEntriesCountByGroup(feed!!.id, listDisplayDate)
-			feed != null && feed?.id != Feed.ALL_ENTRIES_ID -> com.mstudio.cryptonews.App.db.entryDao().observeNewEntriesCountByFeed(feed!!.id, listDisplayDate)
-			else -> com.mstudio.cryptonews.App.db.entryDao().observeNewEntriesCount(listDisplayDate)
+			feed?.isGroup == true -> App.db.entryDao().observeNewEntriesCountByGroup(feed!!.id, listDisplayDate)
+			feed != null && feed?.id != Feed.ALL_ENTRIES_ID -> App.db.entryDao().observeNewEntriesCountByFeed(feed!!.id, listDisplayDate)
+			else -> App.db.entryDao().observeNewEntriesCount(listDisplayDate)
 		}
 
 		newCountLiveData?.observe(this, Observer<Long> { count ->
@@ -312,17 +313,17 @@ class EntriesFragment : Fragment() {
 					entryWithFeed.entry.read = !entryWithFeed.entry.read
 					doAsync {
 						if (entryWithFeed.entry.read) {
-							com.mstudio.cryptonews.App.db.entryDao().markAsRead(listOf(entryWithFeed.entry.id))
+							App.db.entryDao().markAsRead(listOf(entryWithFeed.entry.id))
 						} else {
-							com.mstudio.cryptonews.App.db.entryDao().markAsUnread(listOf(entryWithFeed.entry.id))
+							App.db.entryDao().markAsUnread(listOf(entryWithFeed.entry.id))
 						}
 
 						longSnackbar(coordinator, R.string.marked_as_read, R.string.undo) { _ ->
 							doAsync {
 								if (entryWithFeed.entry.read) {
-									com.mstudio.cryptonews.App.db.entryDao().markAsUnread(listOf(entryWithFeed.entry.id))
+									App.db.entryDao().markAsUnread(listOf(entryWithFeed.entry.id))
 								} else {
-									com.mstudio.cryptonews.App.db.entryDao().markAsRead(listOf(entryWithFeed.entry.id))
+									App.db.entryDao().markAsRead(listOf(entryWithFeed.entry.id))
 								}
 							}
 						}

@@ -20,6 +20,7 @@ package com.mstudio.cryptonews
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.mstudio.cryptonews.data.AppDatabase
 import com.mstudio.cryptonews.data.utils.PrefConstants
 import com.mstudio.cryptonews.utils.putPrefBoolean
 
@@ -33,7 +34,7 @@ class App : Application() {
             private set
 
         @JvmStatic
-        lateinit var db: com.mstudio.cryptonews.data.AppDatabase
+        lateinit var db: AppDatabase
             private set
     }
 
@@ -41,7 +42,7 @@ class App : Application() {
         super.onCreate()
 
         context = applicationContext
-        db = com.mstudio.cryptonews.data.AppDatabase.createDatabase(context)
+        db = AppDatabase.createDatabase(context)
 
         context.putPrefBoolean(PrefConstants.IS_REFRESHING, false) // init
     }

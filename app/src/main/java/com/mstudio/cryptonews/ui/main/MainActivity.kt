@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, AnkoLogger {
             FeedSearchDialog(this).show()
         }
 
-        com.mstudio.cryptonews.App.db.feedDao().observeAllWithCount.observe(this@MainActivity, Observer { nullableFeeds ->
+        App.db.feedDao().observeAllWithCount.observe(this@MainActivity, Observer { nullableFeeds ->
             nullableFeeds?.let { feeds ->
                 val newFeedGroups = mutableListOf<FeedGroup>()
 
@@ -180,9 +180,9 @@ class MainActivity : AppCompatActivity(), MainNavigator, AnkoLogger {
                             when (item.itemId) {
                                 R.id.mark_all_as_read -> doAsync {
                                     when {
-                                        feedWithCount.feed.id == Feed.ALL_ENTRIES_ID -> com.mstudio.cryptonews.App.db.entryDao().markAllAsRead()
-                                        feedWithCount.feed.isGroup -> com.mstudio.cryptonews.App.db.entryDao().markGroupAsRead(feedWithCount.feed.id)
-                                        else -> com.mstudio.cryptonews.App.db.entryDao().markAsRead(feedWithCount.feed.id)
+                                        feedWithCount.feed.id == Feed.ALL_ENTRIES_ID -> App.db.entryDao().markAllAsRead()
+                                        feedWithCount.feed.isGroup -> App.db.entryDao().markGroupAsRead(feedWithCount.feed.id)
+                                        else -> App.db.entryDao().markAsRead(feedWithCount.feed.id)
                                     }
                                 }
                                 R.id.edit_feed -> {
@@ -211,7 +211,7 @@ class MainActivity : AppCompatActivity(), MainNavigator, AnkoLogger {
                                                                 link = newLink
                                                             }
                                                         }
-                                                        com.mstudio.cryptonews.App.db.feedDao().update(newFeed)
+                                                        App.db.feedDao().update(newFeed)
                                                     }
                                                 }
                                             }
@@ -224,12 +224,12 @@ class MainActivity : AppCompatActivity(), MainNavigator, AnkoLogger {
                                             .setTitle(feedWithCount.feed.title)
                                             .setMessage(if (feedWithCount.feed.isGroup) R.string.question_delete_group else R.string.question_delete_feed)
                                             .setPositiveButton(android.R.string.yes) { _, _ ->
-                                                doAsync { com.mstudio.cryptonews.App.db.feedDao().delete(feedWithCount.feed) }
+                                                doAsync { App.db.feedDao().delete(feedWithCount.feed) }
                                             }.setNegativeButton(android.R.string.no, null)
                                             .show()
                                 }
-                                R.id.enable_full_text_retrieval -> doAsync { com.mstudio.cryptonews.App.db.feedDao().enableFullTextRetrieval(feedWithCount.feed.id) }
-                                R.id.disable_full_text_retrieval -> doAsync { com.mstudio.cryptonews.App.db.feedDao().disableFullTextRetrieval(feedWithCount.feed.id) }
+                                R.id.enable_full_text_retrieval -> doAsync { App.db.feedDao().enableFullTextRetrieval(feedWithCount.feed.id) }
+                                R.id.disable_full_text_retrieval -> doAsync { App.db.feedDao().disableFullTextRetrieval(feedWithCount.feed.id) }
                             }
                             true
                         }
@@ -424,8 +424,8 @@ class MainActivity : AppCompatActivity(), MainNavigator, AnkoLogger {
 
     private fun openInBrowser(entryId: String) {
         doAsync {
-            com.mstudio.cryptonews.App.db.entryDao().findByIdWithFeed(entryId)?.entry?.link?.let { url ->
-                com.mstudio.cryptonews.App.db.entryDao().markAsRead(listOf(entryId))
+            App.db.entryDao().findByIdWithFeed(entryId)?.entry?.link?.let { url ->
+                App.db.entryDao().markAsRead(listOf(entryId))
                 browse(url)
             }
         }
@@ -568,12 +568,12 @@ class MainActivity : AppCompatActivity(), MainNavigator, AnkoLogger {
         }
 
         if (feedList.isNotEmpty()) {
-            com.mstudio.cryptonews.App.db.feedDao().insert(*feedList.toTypedArray())
+            App.db.feedDao().insert(*feedList.toTypedArray())
         }
     }
 
     private fun exportOpml(opmlWriter: Writer) {
-        val feeds = com.mstudio.cryptonews.App.db.feedDao().all.groupBy { it.groupId }
+        val feeds = App.db.feedDao().all.groupBy { it.groupId }
 
         val opml = Opml().apply {
             feedType = OPML20Generator().type

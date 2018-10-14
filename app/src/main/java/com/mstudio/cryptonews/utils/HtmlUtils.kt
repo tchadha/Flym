@@ -19,12 +19,13 @@ package com.mstudio.cryptonews.utils
 
 import android.content.Intent
 import android.text.TextUtils
+import com.mstudio.cryptonews.App
 import com.mstudio.cryptonews.service.FetcherService
 import org.jetbrains.anko.doAsync
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 import java.io.File
-import java.util.ArrayList
+import java.util.*
 import java.util.regex.Pattern
 
 object HtmlUtils {
@@ -121,7 +122,7 @@ object HtmlUtils {
             if (!imagesToDl.isEmpty()) {
                 doAsync {
                     FetcherService.addImagesToDownload(mapOf(itemId to imagesToDl))
-                    com.mstudio.cryptonews.App.context.startService(Intent(com.mstudio.cryptonews.App.context, FetcherService::class.java).setAction(FetcherService.ACTION_DOWNLOAD_IMAGES))
+                    App.context.startService(Intent(App.context, FetcherService::class.java).setAction(FetcherService.ACTION_DOWNLOAD_IMAGES))
                 }
             }
         }
